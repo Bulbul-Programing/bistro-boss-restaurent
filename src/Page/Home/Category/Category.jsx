@@ -12,7 +12,7 @@ import CartTitle from '../../Shared/CartTitle/CartTitle';
 const Category = () => {
     return (
         <div>
-            <CartTitle data={{shortTitle:'From 11:00am to 10:00pm', heading: 'ORDER ONLINE'}}></CartTitle>
+            <CartTitle shortTitle='From 11:00am to 10:00pm' heading= 'ORDER ONLINE'></CartTitle>
             <Swiper
                 slidesPerView={4}
                 spaceBetween={30}

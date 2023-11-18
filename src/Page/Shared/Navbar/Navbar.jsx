@@ -1,8 +1,22 @@
 import { NavLink } from "react-router-dom";
 import './navbar.css';
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
+    const [hideNavbar, setHideNavbar] = useState(false);
+    useEffect(() => {
+        let prevScroll = window.pageYOffset;
+        window.onscroll = () => {
+            let currentScrollPos = window.pageYOffset;
 
+            if (prevScroll > currentScrollPos) {
+                setHideNavbar(false);
+            } else {
+                setHideNavbar(true);
+            }
+            prevScroll = currentScrollPos;
+        };
+    }, []);
     const navOption =
         <>
             <NavLink className='px-4 font-bold py-2 rounded-lg' to='/'>Home</NavLink>
@@ -13,7 +27,7 @@ const Navbar = () => {
         </>
 
     return (
-        <div className="navbar fixed z-10 bg-slate-400 bg-opacity-50 text-white">
+        <div className={`navbar sticky z-10 bg-slate-400 bg-opacity-50 text-white transition duration-500 ${hideNavbar ? 'translate-y-[-100px]' : 'top-0 translate-y-0'}`}>
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">

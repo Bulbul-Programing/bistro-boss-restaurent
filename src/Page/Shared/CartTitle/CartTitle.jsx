@@ -1,10 +1,10 @@
 
-const CartTitle = (data) => {
-    console.log(data);
+const CartTitle = ({shortTitle, heading}) => {
+    
     return (
         <div className="text-center w-4/12 my-10 mx-auto">
-            <p className="text-yellow-500">---{data.data.shortTitle}---</p>
-            <h1 className="border-2 py-3 text-4xl font-bold border-r-0 border-l-0 my-3 border-t-slate-600 border-b-slate-600">{data.data.heading}</h1>
+            <p className="text-yellow-500">---{shortTitle}---</p>
+            <h1 className="border-[3px] py-3 text-4xl font-bold border-r-0 border-l-0 my-3 border-t-slate-300 border-b-slate-300">{heading}</h1>
         </div>
     );
 };
