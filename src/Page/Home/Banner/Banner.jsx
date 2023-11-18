@@ -4,7 +4,7 @@ import { Carousel } from 'react-responsive-carousel';
 
 const Banner = () => {
     return (
-        <Carousel className="text-center">
+        <Carousel autoPlay={true} infiniteLoop={true} hight='300px' className="text-center">
             <div>
                 <img className="w-[200px]" src="https://i.ibb.co/m8S0VjT/01.jpg" />
             </div>
