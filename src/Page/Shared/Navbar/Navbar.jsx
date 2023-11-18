@@ -53,7 +53,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-end flex gap-x-3">
                 <img className="w-[50px] h-[50px] rounded-full" src="https://i.ibb.co/FXPbLjC/New-Project-1-200.jpg" alt="" />
-                <a className="btn bg-blue-500 text-white">Login</a>
+                <a className="btn bg-blue-400 text-white">Login</a>
             </div>
         </div>
     );
