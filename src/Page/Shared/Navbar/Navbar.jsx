@@ -1,9 +1,21 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import './navbar.css';
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../../Component/AuthProvider/AuthProvider";
+import swal from "sweetalert";
+import { FaCartPlus } from "react-icons/fa";
 
 const Navbar = () => {
     const [hideNavbar, setHideNavbar] = useState(false);
+
+    const { user, logOut } = useContext(AuthContext)
+    const handleLogout = () => {
+        logOut()
+            .then(() => {
+                swal('success', 'logout success', 'success')
+            })
+    }
+
     useEffect(() => {
         let prevScroll = window.pageYOffset;
         window.onscroll = () => {
@@ -20,10 +32,14 @@ const Navbar = () => {
     const navOption =
         <>
             <NavLink className='px-4 font-bold py-2 rounded-lg' to='/'>Home</NavLink>
-            <NavLink className='px-4 font-bold py-2 rounded-lg' to='/contact'>Contact Us</NavLink>
             <NavLink className='px-4 font-bold py-2 rounded-lg' to='/dashboard'>Dashboard</NavLink>
             <NavLink className='px-4 font-bold py-2 rounded-lg' to='/menu'>Our Menu</NavLink>
             <NavLink className='px-4 font-bold py-2 rounded-lg' to='/shop'>Our Shop</NavLink>
+            <NavLink className='px-4 font-bold py-2 rounded-lg' to='/contact'>Contact Us</NavLink>
+            <button className="px-2 relative">
+                <p><FaCartPlus className="text-lg"></FaCartPlus></p>
+                <div className="badge bg-blue-500 text-white border-none ml-2 absolute top-[-10px]">0</div>
+            </button>
         </>
 
     return (
@@ -52,8 +68,17 @@ const Navbar = () => {
 
             </div>
             <div className="navbar-end flex gap-x-3">
-                <img className="w-[50px] h-[50px] rounded-full" src="https://i.ibb.co/FXPbLjC/New-Project-1-200.jpg" alt="" />
-                <a className="btn bg-blue-400 text-white">Login</a>
+                <p>{user?.displayName}</p>
+                <div>
+                    {
+                        user && <img className="w-[50px] h-[50px] rounded-full" src="https://i.ibb.co/FXPbLjC/New-Project-1-200.jpg" alt="" />
+                    }
+                </div>
+                <div>
+                    {
+                        user ? <button onClick={handleLogout} className="btn bg-blue-400 text-white">Log out</button> : <Link to='/login'><button className="btn bg-blue-400 text-white">Login</button></Link>
+                    }
+                </div>
             </div>
         </div>
     );
