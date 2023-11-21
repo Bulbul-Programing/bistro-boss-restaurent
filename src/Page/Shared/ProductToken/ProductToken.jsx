@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const ProductToken = ({ popular, btnName }) => {
     const [product, setProduct] = useState([])
@@ -49,7 +50,7 @@ const ProductToken = ({ popular, btnName }) => {
             </div>
             <div className="flex justify-center gap-x-4 mb-10">
                 <button onClick={handleBtn} className={`btn ${finalProduct.length < 6 ? 'hidden' : 'block'} text-center border-b-2 border-black border-t-transparent border-r-transparent border-l-transparent rounded-md bg-transparent`} >{btnState === true ? 'Show More' : 'Show Less'}</button> 
-                <button className="btn text-center border-b-2 border-black border-t-transparent border-r-transparent border-l-transparent rounded-md bg-transparent">{btnName}</button>
+                <Link to='/shop'><button className="btn text-center border-b-2 border-black border-t-transparent border-r-transparent border-l-transparent rounded-md bg-transparent">{btnName}</button></Link>
             </div>
         </div>
     );

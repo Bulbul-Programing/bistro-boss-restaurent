@@ -2,10 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Component/AuthProvider/AuthProvider";
 import axios from "axios";
 import swal from "sweetalert";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useCart from "../../../Hooks/useCart";
 
 const CartProduct = ({ item }) => {
     const [product, setProduct] = useState([])
     const {user} = useContext(AuthContext)
+    const axiosSecure = useAxiosSecure()
+    const [,refetch] = useCart()
 
     useEffect(() => {
         fetch(`http://localhost:5000/menu/${item}`)
@@ -24,10 +28,11 @@ const CartProduct = ({ item }) => {
         const price = item.price
         const addProduct = {productId, email, img, name, price}
         
-        axios.post(`http://localhost:5000/carts/${user.email}`, addProduct)
+        axiosSecure.post(`/carts`, addProduct)
         .then(res => {
             if(res.data.insertedId){
                 swal('success', 'Add Product', 'success',{buttons: false})
+                refetch()
             }
         })
         .catch(error => console.log(error))
